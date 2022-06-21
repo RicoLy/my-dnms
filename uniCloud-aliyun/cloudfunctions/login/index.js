@@ -1,7 +1,8 @@
 'use strict';
+const {appId,appSecret} = require('wx-common');
+const db = uniCloud.database();
+
 exports.main = async (event, context) => {
-	const appId = "wx14f36794f18d7abricoly8";
-	const appSecret = "5f48458833f39d014420a43d79f3478cricoly";
 	
 	//event为客户端上传的参数
 	console.log('event : ', event);
@@ -17,6 +18,13 @@ exports.main = async (event, context) => {
 	const openId = res.data.openid;
 	
 	console.log(res.data);
+	let userData = {
+		openId,
+		nickName: "微信用户111",
+		avatarUrl: ""
+	}
+	
+	await db.collection("users").add(userData);
 	//返回数据给客户端
-	return openId;
+	return userData;
 };
