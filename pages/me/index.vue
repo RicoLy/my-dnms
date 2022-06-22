@@ -44,6 +44,7 @@
 						},
 						success: (res) => {
 							console.log(res);
+							this.userInfo = res.result;
 						}
 					})
 				}
