@@ -1,13 +1,13 @@
 let jwt = require('jsonwebtoken');
-const appId = 'wx14f36794f18d7ab8';
-const appSecret = '5f48458833f39d014420a43d79f3478c';
+const appId = 'wx14f36794f18drico7ab8';
+const appSecret = '5f48458833f39d014420a43drico79f3478c';
 const jwtSecret = '79f347ricoly8c';
 
 const db = uniCloud.database();
 const requestNewAccessToken = async () => {
 	const res = await uniCloud.httpclient.request("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid="+appId+"&secret="+appSecret,{dataType:"json"});
 	console.log("重新请求accesstoken");
-	
+
 	const dbRes = await db.collection("system").limit(1).get();
 	if(dbRes.data[0]){
 		await db.collection("system").doc(dbRes.data[0]._id).update({
@@ -24,19 +24,19 @@ const requestNewAccessToken = async () => {
 			}
 		});
 	}
-	
+
 	return res.data.access_token;
 }
 
 const getAccessToken = async (forceUpdate = false) => {
 	const dbRes = await db.collection("system").limit(1).get();
 	const systemInfo = dbRes.data[0];
-	
+
 	const now = new Date().getTime();
 	if(systemInfo&&!forceUpdate){
 		if(now>systemInfo.accesstoken.expiredtime){
 			const accesstoken=await requestNewAccessToken();
-			
+
 			return accesstoken;
 		}else{
 			console.log("使用缓存的accesstoken");
@@ -44,7 +44,7 @@ const getAccessToken = async (forceUpdate = false) => {
 		}
 	}else{
 		const accesstoken=await requestNewAccessToken();
-		
+
 		return accesstoken;
 	}
 }
@@ -93,7 +93,7 @@ const getWXACodeUnlimited = async (scene, page) => {
 
 	return res.data;
 }
-	
+
 module.exports = {
 	appId,
 	appSecret,
