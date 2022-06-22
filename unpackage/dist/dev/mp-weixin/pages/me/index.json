@@ -1,6 +1,8 @@
 {
-  "navigationBarTitleText": "uni-app",
+  "navigationBarTitleText": "我的书架",
+  "enablePullDownRefresh": false,
   "usingComponents": {
-    "ezpage": "/components/ezpage"
+    "ezpage": "/components/ezpage",
+    "bookshelfcell": "/components/dnms-ui/bookshelfcell"
   }
 }

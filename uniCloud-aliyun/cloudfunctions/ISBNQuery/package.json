@@ -1,0 +1,9 @@
+{
+  "name": "ISBNQuery",
+  "dependencies": {
+    "doubanbook": "^1.0.1"
+  },
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}

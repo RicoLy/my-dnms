@@ -2,15 +2,19 @@
   "pages": [
     "pages/me/index",
     "pages/books/books",
-    "pages/map/map"
+    "pages/index/index",
+    "pages/map/map",
+    "pages/createbookshelf/createbookshelf",
+    "pages/bookshelf/bookshelf",
+    "pages/bookdetail/bookdetail"
   ],
   "subPackages": [],
   "window": {
     "navigationStyle": "custom",
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "uni-app",
-    "navigationBarBackgroundColor": "#F8F8F8",
-    "backgroundColor": "#F8F8F8"
+    "navigationBarBackgroundColor": "#fff",
+    "backgroundColor": "#fff"
   },
   "tabBar": {
     "list": [

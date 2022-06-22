@@ -1,5 +1,5 @@
 'use strict';
-const {appId,appSecret} = require('wx-common');
+const {appId, appSecret, getToken} = require('wx-common');
 const db = uniCloud.database();
 
 exports.main = async (event, context) => {
@@ -15,16 +15,33 @@ exports.main = async (event, context) => {
 		}
 	);
 	
-	const openId = res.data.openid;
+	const openid = res.data.openid;
 	
-	console.log(res.data);
-	let userData = {
-		openId,
-		nickName: "微信用户111",
-		avatarUrl: ""
+	let dbRes = await db.collection("users").where({
+			openid:openid
+		}).limit(1).get();
+		
+	let token = getToken(openid);
+	
+	let userData;
+	if(dbRes.affectedDocs<=0){
+		userData = {
+			nickName:"微信用户",
+			avatarUrl:"",
+			gender:0,
+			country:"",
+			province:"",
+			city:""
+		}
+		//不要泄露用户的openid
+		await db.collection("users").add({openid:openid,...userData});
+	}else{
+		userData = dbRes.data[0];
+		
+		//不要泄露用户的openid
+		delete userData["openid"];
 	}
+	userData["token"]=token;
 	
-	await db.collection("users").add(userData);
-	//返回数据给客户端
 	return userData;
 };
